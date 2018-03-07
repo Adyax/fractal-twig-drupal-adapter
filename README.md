@@ -5,7 +5,7 @@ An adapter to let you use [Twig](https://github.com/twigjs/twig.js) templates wi
 ## Installation
 
 ```bash
-
+npm install --save-dev https://github.com/Adyax/fractal-twig-drupal-adapter.git
 ```
 
 in your `fractal.js`
