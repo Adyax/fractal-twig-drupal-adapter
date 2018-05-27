@@ -326,7 +326,7 @@ class TwigAdapter extends Fractal.Adapter {
                           item_id = item.trim().replace('$', '@');
                           let entity = source.find(item_id);
                           entity = entity.isVariant ? entity : entity.variants().default();
-                          let new_context = utils.defaultsDeep(_.cloneDeep(entity.getContext(), _.cloneDeep(main_context));
+                          let new_context = utils.defaultsDeep(_.cloneDeep(entity.getContext(), _.cloneDeep(main_context)));
                           new_context.attributes = new AttributesObject();
                           new_context._self = entity.toJSON();
         
