@@ -254,7 +254,7 @@ class TwigAdapter extends Fractal.Adapter {
             }
 
             this.setAttribute = (attribute, value) => {
-              this.attr[attribute] = value;
+              self.attr[attribute] = value;
               return self;
             }
 
@@ -274,20 +274,22 @@ class TwigAdapter extends Fractal.Adapter {
               output = classes_string.length !== 0 ? `class="${classes_string.trim()}"` : '';
               output = attr_string.length !== 0  ? `${output} ${attr_string}` : output;
 
-              return output.trim();
+              return ' ' + output.trim();
             }
           }
         }
 
         function fill_attributes_object_from_context(attr_object) {
+          if(attr_object['addClass'] !== undefined) {
+            return attr_object;
+          }
           let attributes = new AttributesObject();
           for (let key in attr_object) {
             if(key === 'classes') {
-              let classes_array;
               if(typeof attr_object[key] === 'string') {
                 attributes.addClass(attr_object[key]);
               }
-              else {
+              else if(Array.isArray(attr_object[key]) === true) {
                 attr_object[key].forEach((class_name) => {
                   attributes.addClass(class_name.trim());
                 });
@@ -305,8 +307,10 @@ class TwigAdapter extends Fractal.Adapter {
               let type = typeof context_yaml[key];
               let item_id;
               if(key === 'attributes' && context_yaml[key] !== '$create_attributes()') {
-                context_yaml[key] = fill_attributes_object_from_context(context_yaml[key]);
-                old_context_yaml[key] = context_yaml[key];
+                if(context_yaml[key] !== null) {
+                  context_yaml[key] = fill_attributes_object_from_context(context_yaml[key]);
+                  old_context_yaml[key] = context_yaml[key];
+                }
               }
               else if((key === 'drupal_settings') && (type === 'object' || type === 'array')) {
                 self.drupal_settings.push(context_yaml[key]);
