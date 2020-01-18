@@ -4,6 +4,7 @@ const Fractal = require('@frctl/fractal');
 const _ = require('lodash');
 const fs = require('fs');
 const Path = require('path');
+const twigDrupalFilters = require('twig-drupal-filters');
 const utils = Fractal.utils;
 
 class TwigAdapter extends Fractal.Adapter {
@@ -485,6 +486,8 @@ module.exports = function(config) {
                     Twig.exports.extendTag(tag(Twig));
                 });
             });
+
+            twigDrupalFilters(Twig);
 
             const adapter = new TwigAdapter(Twig, source, app, config);
 

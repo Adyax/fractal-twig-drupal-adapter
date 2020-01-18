@@ -15,7 +15,7 @@ module.exports = function(fractal){
                 parse: function (token, context, chain) {
                     return {
                         chain: chain,
-                        output: Twig.parse.apply(this, [token.output, context])
+                        output: this.parse(token.output, context),
                     };
                 }
             };
