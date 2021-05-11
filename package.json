@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "@frctl/fractal": "latest",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "query-string": "^5.0.0",
     "twig": "^1.10.5",
     "twig-drupal-filters": "^2.0.0"
